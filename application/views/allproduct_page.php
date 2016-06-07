@@ -7,9 +7,7 @@
 	                <?php if($kategori->id_kategori==$produk->id_kategori){?>
 						<li class="product">
 		                    <a href="<?php echo site_url('dashboard/konten/'.$kategori->id_kategori.'/'.$produk->id_barang);?>">
-		                    	<object class="img-prod" data="<?php echo base_url('uploads/'.$produk->nama_gbr);?>" type="image/png">
-		                    	<img class="img-prod" src="<?php echo base_url('asset/images/noimage.png');?>"/>
-								</object>
+		                    	<img class="img-prod" src="<?php echo base_url('uploads/'.$produk->nama_gbr);?>" onerror="this.src='http://kpinti.hol.es/asset/images/noimage.png'">
 							</a><br>
 							<a href="<?php echo site_url('dashboard/konten/'.$kategori->id_kategori.'/'.$produk->id_barang);?>">
 							<div align='center'>

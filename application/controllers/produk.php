@@ -34,51 +34,43 @@ class Produk extends CI_Controller {
 	}
 	public function tambahProduk(){
 		$idKategori = $this->input->post('kategori','true');
-		$user = $this->session->userdata('username');
-		$data['username'] = $user;
-		$data['nama'] = $this->input->post('nama','true');
-		$data['jumlah'] = $this->input->post('jumlah','true');
-		$data['harga'] = $this->input->post('harga','true');
-		$data['deskripsi'] = $this->input->post('deskripsi','true');
-		$data2=$data;
 		$data['daftar_kategori']=$this->kategori_model->getAll();
+		$data['username'] = $post['username'] = $this->session->userdata('username');
+		$post['nama'] = $this->input->post('nama','true');
+		$post['jumlah'] = $this->input->post('jumlah','true');
+		$post['harga'] = $this->input->post('harga','true');
+		$post['deskripsi'] = $this->input->post('deskripsi','true');
 
 		$this->form_validation->set_rules('kategori', 'Kategori','required');
 		$this->form_validation->set_rules('nama', 'Nama Barang','required');
 		$this->form_validation->set_rules('jumlah','Jumlah Barang','required|integer');
 		$this->form_validation->set_rules('harga','Harga Barang','required|integer');
 
-		if($this->form_validation->run() == FALSE){
+		if($this->form_validation->run() == FALSE)
 			$this->template->display('addproduct_page',$data,'ada');
-		}
 		else
 		{
 			$gambar = array('nama_gbr'=>'');
 			$config = array(
 			'upload_path'=>"./uploads/",
 			'allowed_types'=>"gif|jpg|jpeg|png|bmp",
-			'max_size' => "2048000"
+			'max_size' => "2048000",
+			'file_name' => "File_".time()
 			);
 
 			
 			$this->load->library('upload',$config);		
 	        if ($this->upload->do_upload())
-	        {
-	            $gbr = $this->upload->data();
-	            $gambar['nama_gbr'] = $gbr['file_name'];
-				
-				echo '<script language="javascript">';
-		        echo 'alert("berhasil foto")';
-		        echo '</script>';
-		        //echo '<meta http-equiv="refresh" content="0;url=../dashboard" />'; 
-	        }else{
-	        	  
-	        	echo '<script language="javascript">';
-		        echo 'alert("gagal foto")';
-		        echo '</script>';
-		        //echo '<meta http-equiv="refresh" content="0;url=../dashboard" />'; 
-	        }
-			$this->produk_model->addProduct($data2,$gambar,$user,$idKategori);
+		        {
+		            $gbr = $this->upload->data();
+		            $gambar['nama_gbr'] = $gbr['file_name'];
+					
+			        //echo '<meta http-equiv="refresh" content="0;url=../dashboard" />'; 
+		        }else{
+		        	  
+			        //echo '<meta http-equiv="refresh" content="0;url=../dashboard" />'; 
+		        }
+			$this->produk_model->addProduct($post,$gambar,$user,$idKategori);
 			echo '<script language="javascript">';
 	        echo 'alert("Product Added")';
 	        echo '</script>';

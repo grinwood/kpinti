@@ -9,9 +9,7 @@
     </div>
     <div class="contentmenu">
         <div id="akun-content">
-            <object style="border:1px solid #eee" data="<?php echo base_url('uploads/pp');?>" type="image/png">
-               <img style="border:1px solid #eee" src="<?php echo base_url('asset/images/noimageuser.png');?>"/>
-            </object>
+            <img class="img-prod" src="<?php echo base_url('uploads/'.$produk->nama_gbr);?>" onerror="this.src='http://kpinti.hol.es/asset/images/noimageuser.png'">
             <div style="margin-left:10px">
                 <p>Username: <?php echo $username;?></p>
                 <?php echo form_open('penjual/ubahPassword');?>
