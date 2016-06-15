@@ -15,15 +15,15 @@
 			
 				<div class="wrap">
 					<div class ="centered">
-	   			<?php $kelas = array('class'=>'form-signin');?>
-				<?php echo form_open('penjual/login',$kelas);?>
-            	<?php echo validation_errors(); ?>
-				<p style="color:red; text-align:center"><?php echo $this->session->flashdata('notification')?></p>
-				<input type="text" class="form-control" name="username"placeholder="Username" required >
-				<input type="password" class="form-control" name="password"placeholder="Password"  required>
-				<input type="submit" value="Login" class="btn btn-success" style="width:100%" >
-				<?php echo form_close();?>
-				</div>
+			   			<?php $kelas = array('class'=>'form-signin');?>
+						<?php echo form_open('penjual/login',$kelas);?>
+		            	<?php echo validation_errors(); ?>
+						<p style="color:red; text-align:center"><?php echo $this->session->flashdata('notification')?></p>
+						<input type="text" class="form-control" name="username"placeholder="Username" required >
+						<input type="password" class="form-control" name="password"placeholder="Password"  required>
+						<input type="submit" value="Login" class="btn btn-success" style="width:100%" >
+						<?php echo form_close();?>
+					</div>
 				</div>
 			<!--application/views/function_public/login.php-->
 

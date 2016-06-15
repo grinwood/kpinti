@@ -1,0 +1,139 @@
+<?php if(! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Cart extends CI_Controller{
+   function __construct() {
+      parent::__construct();
+      $this->load->helper('url');
+	  $this->load->library('session');
+	  $this->load->helper('form');
+	  $this->load->library('cart');
+      $this->load->model('produk_model');	
+      $this->load->model('kategori_model') ;
+      $this->load->model('cart_model');
+      $this->load->model('order_model');
+      $this->load->model('penjual/penjual_model');	}
+	
+	function index(){
+		$user_info = $this->session->userdata('logged_in');
+	  	if ($user_info!=false){
+	  		$data['username'] = $this->session->userdata('username');
+	  		$data['user'] = $this->penjual_model->get_user($this->session->userdata('username'))->row();
+			$data['daftar_kategori']=$this->kategori_model->getAll();
+	  		$data['daftar_keranjang']=$this->cart_model->ambil_produk($data['username'])->result();
+			$this->template->display('cart_page',$data,'ada');
+	  	}
+	  	else
+	  	{
+	    	redirect(site_url('welcome'));
+	  	}
+	}
+
+	function tambahBarang($user,$idPro){
+		$user=$this->session->userdata('username');
+		$data3=$this->produk_model->getOnePro($idPro)->row();
+		$cekBarang=$this->cart_model->ambil_produk($user)->row();
+		$data2=$this->order_model->getOrder($user)->row();
+		$data = array(
+            'id' => $data3->id_barang,
+            'qty' => 1,
+            'price' => $data3->harga,
+            'name' => $data3->nama,
+            'id_order'=>'40',
+            'deskripsi' =>$data3->deskripsi
+        );
+    	$this->cart->insert($data);
+    	$this->order_model->addOrder($user,$data);
+    	$this->cart_model->addCart($user,$data,$data2);
+        echo '<script language="javascript">';
+    	echo 'alert("berhasil ditambahkan ke dalam keranjang")';
+    	echo '</script>';
+    	echo '<meta http-equiv="refresh" content="0;url='.site_url('dashboard').'" />';
+    }
+
+    function update(){
+    	$user=$this->session->userdata('username');
+    	$data2 = $this->input->post('approve');
+        if ($data2) {
+            for ($i = 0; $i <= sizeof($data2); $i++) {
+                $this->delete($data2[$i]);
+            }
+            redirect('cart');
+        } else {
+            $this->cart->update($_POST);
+            //$data=$this->cart->contents();
+            echo '<script language="javascript">';
+    		echo 'alert("isi = '.$data['id_order'].'")';
+    		echo '</script>';
+            $this->cart_model->updateCart($data);
+            $this->order_model->updateOrder($data);
+            
+            $this->session->set_flashdata('messages', 'Shopping cart updated');
+            redirect('cart');
+        }
+		//echo "<meta http-equiv='refresh' content='0; url=".base_url()."cart/'>";
+        /*$this->cart->update($_POST);
+        echo '<script language="javascript">';
+    	echo 'alert("berhasil update keranjang")';
+    	echo '</script>';*/
+	    //redirect('cart');
+    }
+       //redirect('carts');
+		/*if(count($cekBarang) == 0){
+			$this->order_model->addOrder($user,$data);
+			$data2=$this->order_model->getOrder($user)->row();
+			$this->cart_model->addCart($user,$data,$data2);
+			echo '<script language="javascript">';
+        	echo 'alert("berhasil ditambahkan ke dalam keranjang")';
+        	echo '</script>';
+        	echo '<meta http-equiv="refresh" content="0;url='.site_url('dashboard').'" />';
+		}else {
+			$temp_id=0;
+			foreach($this->cart_model->getAll()->result() as $temp){
+				//$temp=$cekBarang->id_barang;
+				if($idPro==$temp->id_barang){
+					$temp_id=$idPro;
+					break;
+				}	
+			}
+			if($idPro==$temp_id){
+				$harga=$this->order_model->getOrder($user)->row();
+				$total=$this->order_model->getOrder($user)->row();
+				$harga2=$harga->total_harga+$cekBarang->harga_order;
+				$total2=$total->total_order+$cekBarang->jumlah_order;
+				$this->order_model->updateOrder($harga2,$total2,$user);
+				$this->cart_model->updateCart($harga2,$total2,$user);
+				echo '<script language="javascript">';
+	        	echo 'alert("berhasil update keranjang")';
+	        	echo '</script>';
+	        	echo '<meta http-equiv="refresh" content="0;url='.site_url('dashboard').'" />';
+			}else{
+				$this->order_model->addOrder($user,$data);
+				$data2=$this->order_model->getOrder($user)->row();
+				$this->cart_model->addCart($user,$data,$data2);
+				echo '<script language="javascript">';
+	        	echo 'alert("berhasil ditambahkan ke dalam keranjang")';
+	        	echo '</script>';
+	        	echo '<meta http-equiv="refresh" content="0;url='.site_url('dashboard').'" />';
+			}
+		}*/
+        //echo '<meta http-equiv="refresh" content="0;url='.site_url('dashboard').'" />';
+        /*redirect(site_url('dashboard'));*/
+	
+
+	function deleteBarang($id_pemesanan){
+
+		$where = array('id_pemesanan'=>$id_pemesanan);
+		$this->cart_model->deleteCart($where,'cart');
+		echo '<script language="javascript">';
+        echo 'alert("Hapus barang berhasil dilakukan")';
+        echo '</script>';
+        echo '<meta http-equiv="refresh" content="0;url='.site_url('cart').'" />';
+    }
+
+    function updateBarang($username){
+    	$where=array('username'=>$username);
+    	$data['username']=$this->order_model->edit_data($where,'username')->result();
+
+    }
+	
+}

@@ -4,8 +4,7 @@ class Produk_Model extends CI_Model{
 	function __construct(){
 		parent::__construct();
 	}
-	public function addProduct($data,$gbr,$user,$kategori){
-		$this->db->set('username',$user);
+	public function addProduct($data,$gbr,$kategori){
 		$this->db->set('id_kategori',$kategori);
 		$this->db->set($data);
 		$this->db->set($gbr);
@@ -23,6 +22,10 @@ class Produk_Model extends CI_Model{
 		}
 		$hasil->free_result();
 		return $data;
+	}
+	function getProByUser($user){
+		$this->db->where('username',$user);
+		return $this->db->get('produk');
 	}
 	function viewByKategori($id_kategori){
 		$this->db->where('id_kategori',$id_kategori);
@@ -77,6 +80,16 @@ class Produk_Model extends CI_Model{
 		}
 		$hasil->free_result();
 		return $data;
+	}
+	function deleteProduk($id){
+		$this->db->where('id_barang',$id);
+		$this->db->delete('produk');
+	}
+	function changeProduk($id,$data){
+		$this->db->where('id_barang',$id);
+		$this->db->set('harga',$data['harga']);
+		$this->db->set('jumlah',$data['jumlah']);
+		$this->db->update('produk');
 	}
 }
 

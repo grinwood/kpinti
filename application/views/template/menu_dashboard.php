@@ -1,12 +1,5 @@
-<script>
-	$(document).ready(function(){
-		$('#drop-akun').click(function(){
-			$('#drop-akun-content').slideToggle(200);
-		});
-	});
-</script>
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<!-- Navigation -->	
+<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -31,22 +24,26 @@
 				</li>-->
                 <li>
                     <?php echo form_open('produk/cariProduk');?>
-                    <input class="form-control" type="text" placeholder="Cari Produk" name="search" size="80"/>
+                    <input class="form-control" type="text" placeholder="Cari Produk" name="search" size="70"/>
                     <button type="submit" class="form-control">
                     <span style="color:#999" class="glyphicon glyphicon-search"></span></button>
                     <?php echo form_close();?>
                 </li>
-			</div>      
+			</div>   
 			<ul class="nav navbar-nav navbar-right">
-				<li><a id="drop-akun" href="#/" ><span class="glyphicon glyphicon-user"></span> <?php echo $username;?></a>
-					<div id="drop-akun-content">
-						<a href="<?php echo site_url('penjual/viewAkun');?>"><p>Akun Saya</p></a>
-						<a href="#/"><p>Barang Saya</p></a>
-						<a href="<?php echo site_url('penjual/logout');?>"><br><p><strong>Logout </strong><span class="glyphicon glyphicon-log-out"></span></p></a>
-					</div>
-				</li>
+				<li class="dropdown">
+		          <a href="#/" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> <?php echo $user->username;?></a>
+		          <ul class="dropdown-menu ">
+		            <li><a href="<?php echo site_url('penjual/viewAkun/'.$user->username.'/akun');?>"><span class="glyphicon glyphicon-user pull-right"></span>Akun Saya</a></li>
+		            <li class="divider"></li>
+		            <li><a href="<?php echo site_url('penjual/viewAkun/'.$user->username.'/barang');?>"><span class="glyphicon glyphicon-list pull-right"></span>Barang Saya</a></li>
+	              	<li class="divider"></li>
+		            <li><a href="<?php echo site_url('penjual/logout');?>"><span class="glyphicon glyphicon-log-out pull-right"></span>Logout </a></li>
+		          </ul>
+		        </li>
 				<li><a href="<?php echo site_url('produk/tambahProduk');?>"><span class="glyphicon glyphicon-plus"></span> Add Product</a></li>
-				<li><a href="<?php echo site_url('cart');?>" style="margin-left:10px">Cart</a></li>
+				<li><a href="<?php echo site_url('cart/viewall');?>"><span class="glyphicon glyphicon-shopping-cart"></span> Cart (<?=$this->cart->total_items();?>)</a>
+				</li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

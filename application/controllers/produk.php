@@ -6,6 +6,7 @@ class Produk extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('produk_model');
+		$this->load->model('penjual/penjual_model');
 		$this->load->model('kategori_model');
 		$this->load->helper('url');
 		$this->load->helper('form');
@@ -29,13 +30,16 @@ class Produk extends CI_Controller {
 	public function cariProduk() {
 		$target = $this->input->post('search','true');
 		$result['daftar_result'] = $this->produk_model->searchProduk($target);
-		$result['daftar_kategori'] = $this->kategori_model->getAll();
-		$this->template->display('result_page',$result);
+		if($this->session->userdata('logged_in')==true)
+			$this->template->display('result_page',$result,'ada');
+		else
+			$this->template->display('result_page',$result);
 	}
 	public function tambahProduk(){
 		$idKategori = $this->input->post('kategori','true');
 		$data['daftar_kategori']=$this->kategori_model->getAll();
-		$data['username'] = $post['username'] = $this->session->userdata('username');
+		$post['username'] = $post['username'] = $this->session->userdata('username');
+  		$data['user'] = $this->penjual_model->get_user($post['username'])->row();
 		$post['nama'] = $this->input->post('nama','true');
 		$post['jumlah'] = $this->input->post('jumlah','true');
 		$post['harga'] = $this->input->post('harga','true');
@@ -70,11 +74,36 @@ class Produk extends CI_Controller {
 		        	  
 			        //echo '<meta http-equiv="refresh" content="0;url=../dashboard" />'; 
 		        }
-			$this->produk_model->addProduct($post,$gambar,$user,$idKategori);
+			$this->produk_model->addProduct($post,$gambar,$idKategori);
 			echo '<script language="javascript">';
 	        echo 'alert("Product Added")';
 	        echo '</script>';
 	        echo '<meta http-equiv="refresh" content="0;url=../dashboard" />';
 		}
+	}
+	public function deleteProduk($id,$username){
+		$this->produk_model->deleteProduk($id);
+		echo '<script language="javascript">';
+	    echo 'alert("Produk berhasil dihapus")';
+	    echo '</script>';
+	    redirect(site_url('penjual/viewAkun/'.$username.'/barang'));
+	}
+	public function ubahProduk($id,$uname){
+  		$data['user'] = $this->penjual_model->get_user($uname)->row();
+  		$data['produk'] = $this->produk_model->getProByUser($uname)->result();
+		$data['harga'] = $this->input->post('harga','true');
+		$data['jumlah'] = $this->input->post('jumlah','true');
+
+		$this->form_validation->set_rules('jumlah','Jumlah Barang','required|integer');
+		$this->form_validation->set_rules('harga','Harga Barang','required|integer');
+
+		if($this->form_validation->run() == FALSE)
+			$this->session->set_flashdata('notif-barang-gagal', 'Input harus angka');
+		else
+		{
+			$this->produk_model->changeProduk($id,$data);
+			$this->session->set_flashdata('notif-barang-success', 'Berhasil diubah');
+		}
+	    redirect(site_url('penjual/viewAkun/'.$uname.'/barang'));
 	}
 }

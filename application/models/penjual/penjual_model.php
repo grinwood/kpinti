@@ -26,4 +26,16 @@ class Penjual_model extends CI_Model {
 		$this->db->set('password',$pass);
 		$this->db->update('penjual');
 	}
+	public function editAkun($data,$username){
+		$this->db->where('username',$username);
+		$this->db->set($data);
+		$this->db->update('penjual');
+	}
+
+	public function getUserByPro($id_barang){
+		$this->db->select('*');
+		$this->db->where('id_barang',$id_barang);
+		$res=$this->db->get('produk')->row();
+		return $this->get_user($res->username);
+	}
 }

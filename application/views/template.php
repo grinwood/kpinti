@@ -5,19 +5,19 @@
 
 	
 	<!--Bootstrap CSS-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/css/bootstrap.css');?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/css/bootstrap.min.css');?>">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <!--Custom CSS-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/css/global.css');?>">
+	<!--<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/simplex/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Ib5WUYOh/fqe9wT9MDBX+VgUWQuUf8oDH3yuR9Kr+6Y5ejq92KR8LEuCbRiGZpG" crossorigin="anonymous">
+	-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/css/bootstrap.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/css/style.css');?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/css/colorbox.css');?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/css/custom.css');?>">
     <!--Script-->
     <script src="<?php echo base_url('asset/js/jquery.js');?>"></script>
     <script src="<?php echo base_url('asset/js/bootstrap.js');?>"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url('asset/js/bootstrap.min.js');?>"></script>
     <script src="<?php echo base_url('asset/js/jquery.colorbox.js');?>"></script>
+    <script src="<?php echo base_url('asset/js/bootstrap-dropdownhover.min.js');?>"></script>
     
 	<meta http-equiv=”content-type” content=”text/html; charset=utf-″/>
 	<script>
@@ -43,11 +43,11 @@
 		<div id="tp-menu">
 		<!--Area Top Menu-->
 			<?php echo $_top_menu;?>
-		</div>
+		</div><!--
 		<div style="margin-top:-50px" id="tp-kategori">
-		<!--Area Kategori Menu-->
-			<?php echo $_kategori_menu;?>
-		</div>
+		<!Area Kategori Menu>
+			<?php //echo $_kategori_menu;?>
+		</div>-->
 		<div id="tp-contentwrap">
 			<div id="tp-content">
 			<!--Area content-->
@@ -59,10 +59,10 @@
 			</div>
 			<div style="clear: both;"></div>
 			</div>
-			<div id="tp-footer" style="margin-top:50px	">
-			<!--Area Footer-->
-				<p>Copyright &copy;</p>
-			</div>
+		</div>
+		<div id="tp-footer" style="margin-top:50px	">
+		<!--Area Footer-->
+			<p>Copyright &copy;</p>
 		</div>
 	</body>
 </html>

@@ -1,20 +1,10 @@
-.wrap {
-    background: #ffffff;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width:500px;
-	margin:0 auto;
-}
-.centered {
-    background: #ffffff;
-    max-width: 50%;
-}
+
 .custom{
 	background: #eee;
 }
 .login-form{
     display:none;
 }
-
+body {
+    margin-top: 20px;
+}
