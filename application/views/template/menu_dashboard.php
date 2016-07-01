@@ -10,7 +10,6 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand page-scroll" href="dashboard.php"></a>
 		</div>
 		<div class="navbar-header">
 			<a class="navbar-brand" href="<?php echo site_url('dashboard');?>">T.corp</a>
@@ -24,7 +23,7 @@
 				</li>-->
                 <li>
                     <?php echo form_open('produk/cariProduk');?>
-                    <input class="form-control" type="text" placeholder="Cari Produk" name="search" size="70"/>
+                    <input class="form-control" type="text" placeholder="Cari Produk" name="search" size="75" value="<?php echo set_value('search');?>"/>
                     <button type="submit" class="form-control">
                     <span style="color:#999" class="glyphicon glyphicon-search"></span></button>
                     <?php echo form_close();?>
@@ -49,4 +48,7 @@
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container-fluid -->
+	<div class="kategori">
+        <?php $this->load->view('template/menu_kategori');?>
+    </div>
 </nav>

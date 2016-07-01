@@ -6,6 +6,8 @@ class Cart extends CI_Controller{
       $this->load->model('billing_model');
       $this->load->library('cart');	
       $this->load->library('template');
+      $this->load->model('penjual/penjual_model');
+      $this->load->model('m_wilayah');
   }
 	
 	function index(){
@@ -17,7 +19,12 @@ class Cart extends CI_Controller{
 		$this->load->view('cart_page',$data);
 	}
 	function viewall(){
-		$this->template->display('cartBesar_page');
+		if($this->session->userdata('logged_in')==true){
+			$username = $this->session->userdata('username');
+	  		$data['user'] = $this->penjual_model->get_user($username)->row();
+			$this->template->display('cartBesar_page',$data,'ada');
+	  	}else
+			$this->template->display('cartBesar_page');
 	}
 	function add(){
      	// Set array for send data.
@@ -79,7 +86,20 @@ class Cart extends CI_Controller{
 	
 	function billing_view(){
                 // Load "billing_view".
-		$this->template->display('checkout_page');
+		$keranjang = $this->cart->total_items();
+
+        if($keranjang == 0)
+        {
+            
+        }else{
+			$data['provinsi']=$this->m_wilayah->get_all_provinsi();
+			if($this->session->userdata('logged_in')==true){
+				$username = $this->session->userdata('username');
+		  		$data['user'] = $this->penjual_model->get_user($username)->row();
+				$this->template->display('checkout_page',$data,'ada');
+			}else
+				$this->template->display('checkout_page',$data);
+		}
     }
     function save(){
     	$customer = array(
@@ -135,5 +155,6 @@ class Cart extends CI_Controller{
 	      
                 // After storing all imformation in database load "billing_success".
                 //$this->load->view('billing_success');
+		$this->cart->destroy();
 	}
 }

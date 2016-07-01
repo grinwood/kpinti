@@ -29,6 +29,10 @@
                 parent.$.colorbox.close();
                 window.parent.location.reload();
             });
+            $('#updatefield ').on('change keyup', function() {
+              var sanitized = $(this).val().replace(/[^0-9]/g, '');
+              $(this).val(sanitized);
+            });
         });
     </script>
 </head>
@@ -99,7 +103,7 @@
                                         <h6><strong><?php echo number_format($item['price'], 2); ?> <span class="text-muted">x</span></strong></h6>
                                     </div>
                                     <div class="col-xs-4">
-                                        <?php echo form_input('cart[' . $item['id'] . '][qty]', $item['qty'], 'class="form-control input-sm" maxlength="3" size="1" style="text-align: right"'); ?>
+                                        <?php echo form_input('cart[' . $item['id'] . '][qty]', $item['qty'], 'class="form-control input-sm" maxlength="3" size="1" id="updatefield" style="text-align: right"'); ?>
                                         <?php $grand_total = $grand_total + $item['subtotal']; ?>
                                     </div>
                                     <!--<div class="col-xs-2">

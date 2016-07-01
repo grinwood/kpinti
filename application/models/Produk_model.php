@@ -16,6 +16,7 @@ class Produk_Model extends CI_Model{
 		$data = array();
 		$this->db->select("*");
 		$this->db->from("produk");
+		$this->db->order_by('tgl_ditambah','desc');
 		$hasil = $this->db->get();
 		if($hasil->num_rows() > 0){
 			$data = $hasil->result();
@@ -25,9 +26,10 @@ class Produk_Model extends CI_Model{
 	}
 	function getProByUser($user){
 		$this->db->where('username',$user);
+		$this->db->order_by('tgl_ditambah','desc');
 		return $this->db->get('produk');
 	}
-	function viewByKategori($id_kategori){
+	function getByCategory($id_kategori){
 		$this->db->where('id_kategori',$id_kategori);
 		return $this->db->get('produk');
 	}
@@ -51,6 +53,20 @@ class Produk_Model extends CI_Model{
 		return $this->db->get();
 			
 	}
+	public function getRows($id = ''){
+		$this->db->select('*');
+		$this->db->from('produk');
+		if($id){
+			$this->db->where("id_barang",$id);
+			$query = $this->db->get();
+			$result = $query->row_array();
+		}else{
+			$this->db->order_by('name','asc');
+			$query = $this->db->get();
+			$result = $query->result_array();
+		}
+		return !empty($result)?$result:false;
+	}
 /*	function count_all($sesi_cari = ''){
 		if($sesi_cari == true){
 			$this->db->like('judul', $sesi_cari);
@@ -71,12 +87,18 @@ class Produk_Model extends CI_Model{
 		$hasil->free_result();
 		return $data;
 	}
-	function searchProduk($target){
+	function getKategori($id){
+		$this->db->where('id_kategori',$id);
+		return $this->db->get('kategori');
+	}
+	function searchProduk($target,$id=null){
 		$data = array();
 		$this->db->like("nama",$target);
+		if($id!=NULL)
+			$this->db->where('id_kategori',$id);
 		$hasil = $this->db->get("produk");
 		if($hasil->num_rows() > 0){
-			$data = $hasil->result();
+			$data = $hasil->result_array();
 		}
 		$hasil->free_result();
 		return $data;
@@ -90,6 +112,18 @@ class Produk_Model extends CI_Model{
 		$this->db->set('harga',$data['harga']);
 		$this->db->set('jumlah',$data['jumlah']);
 		$this->db->update('produk');
+	}
+	function changeProdukDetail($data,$id,$id_kategori,$gambar){
+		$this->db->where('id_barang',$id);
+		$this->db->set('id_kategori',$id_kategori);
+		$this->db->set($data);
+		$this->db->set('nama_gbr',$gambar['nama_gbr']);
+		$this->db->update('produk');
+	}
+	//insert transaction data
+	public function insertTransaction($data = array()){
+		$insert = $this->db->insert('payments_paypal',$data);
+		return $insert?true:false;
 	}
 }
 

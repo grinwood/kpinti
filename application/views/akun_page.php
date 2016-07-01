@@ -46,7 +46,7 @@ $(document).ready(function() {
                         <?php echo form_open('penjual/ubahPassword');?>
                         <p><label>Username: </label><br><?php echo $user->username;?></p>
                         <p style="float:left"><input type='password' name='password' placeholder='Ubah Password' size="40%" class='form-control'/></p>
-                        <p style="float:left;margin-left:5px"><input  type="submit" value="Ubah" class="btn btn-success" /></p>
+                        <p style="float:left;margin-left:5px"><input  type="submit" value="Ubah" class="btn btn-primary" /></p>
                         <?php echo form_close();?>
                     </div>
                     <div class="info-identitas">
@@ -55,7 +55,7 @@ $(document).ready(function() {
                         <label>Nama Lengkap</label><input  type='text' name='nama' value="<?php echo $user->nama;?>" class='form-control'/>
                         <label>Email</label><input type="email" value="<?php echo $user->email;?>" name="email" class="form-control" />
                         <label>Nomor Telepon</label><input type="text" value="<?php echo $user->telepon;?>" name="telepon" class="form-control" /><br/>
-                        <p style="float:left"><input  type="submit" value="Simpan" class="btn btn-success" /></p>
+                        <p style="float:left"><input  type="submit" value="Simpan" class="btn btn-primary" /></p>
                         <?php echo form_close();?>               
                     </div>
                 </div>
@@ -69,7 +69,7 @@ $(document).ready(function() {
                             echo form_open('produk/ubahProduk/'.$_produk->id_barang.'/'.$user->username);
                             echo "<label>Harga Produk </label><input type='text' value='".$_produk->harga."' name='harga' class='form-control'/>";
                             echo "<label>Stok Produk </label><input type='text' value='".$_produk->jumlah."' name='jumlah' class='form-control' />";
-                            echo "<br><input type='submit' value='Ubah' class='btn btn-success' /><a href='' style='margin-left:10px'>Lebih rinci</a>";
+                            echo "<br><input type='submit' value='Ubah' class='btn btn-primary' /><a href='".site_url('produk/ubahProdukDetail/'.$_produk->id_barang.'/'.$user->username)."'style='margin-left:10px'>Lebih rinci</a>";
                             echo form_close();
                             echo "</td></tr>";
                         }?>

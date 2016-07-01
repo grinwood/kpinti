@@ -31,10 +31,17 @@ class Welcome extends CI_Controller {
 	}
 	function index(){
 		$data['daftar_kategori']=$this->kategori_model->getAll();
-		$data['daftar_produk']=$this->produk_model->getAll();
-	    $this->template->display('allproduct_page',$data);
+		$data['daftar_produk']=$this->dashboard_lib->displayProduk();
+		$data['daftar_kategori2'] = $this->dashboard_lib->getCategory();
+		if($this->session->userdata('logged_in')==true){
+			$data['user'] = $this->penjual_model->get_user($this->session->userdata('username'))->row();
+	    	$this->template->display('home_page',$data,'ada');
+	    }else
+	    	$this->template->display('home_page',$data);
+
 	}
 	function contoh_parameter(){
 		$this->template->display('view_parameter',array('judul’=>’judul View'));
 	}
+	
 }

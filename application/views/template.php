@@ -18,19 +18,26 @@
     <script src="<?php echo base_url('asset/js/bootstrap.min.js');?>"></script>
     <script src="<?php echo base_url('asset/js/jquery.colorbox.js');?>"></script>
     <script src="<?php echo base_url('asset/js/bootstrap-dropdownhover.min.js');?>"></script>
+    <script src="<?php echo base_url('asset/js/validator.js');?>"></script>
+	<script type="<?php echo base_url('asset/js/responsivemultimenu.js');?>"></script>
     
 	<meta http-equiv=”content-type” content=”text/html; charset=utf-″/>
 	<script>
     $(document).ready(function(){
         $(window).scroll(function() { 
             if($(window).scrollTop()===0) {
-                $('.dropdown-kategori').slideDown(300);
-            	$('.navbar').addClass('top');
+                $('.kategori').slideDown(300);
             }else{
-                $('.dropdown-kategori').slideUp(300); 
-            	$('.navbar').removeClass('top');
+                $('.kategori').slideUp(300);
+                $('.navbar').hover(
+                	function(){$('.kategori').slideDown(300);
+                });
             }
         }); 
+        $('.kat').hover(
+        	function(){$('#tp-content').css('opacity',0.2)},
+        	function(){$('#tp-content').css('opacity',1)
+	    });
     });
     </script>
 </head>
@@ -46,8 +53,12 @@
 		</div><!--
 		<div style="margin-top:-50px" id="tp-kategori">
 		<!Area Kategori Menu>
-			<?php //echo $_kategori_menu;?>
-		</div>-->
+			<?php echo $_kategori_menu;?>
+		</div>--><!--
+		<div id="tp-sidebar-left">
+			<!--Area left Menu
+				<?php echo $_left_menu;?>
+			</div>-->
 		<div id="tp-contentwrap">
 			<div id="tp-content">
 			<!--Area content-->
@@ -57,6 +68,7 @@
 			<!--Area Right Menu-->
 				<?php //echo $_right_menu;?>
 			</div>
+			
 			<div style="clear: both;"></div>
 			</div>
 		</div>

@@ -20,7 +20,7 @@
 </head>
 <div class="container" style="margin-top:50px">
   <hr>
-   <div class="panel panel-success">
+   <div class="panel panel-primary">
         <div class="panel-heading">
             <?php $kategori; ?>
             <h3 class="panel-title"><?php echo $kategori->nama_kategori; ?></h3>
@@ -41,7 +41,7 @@
             echo form_hidden('name', $produk->nama);
             echo form_hidden('price', $produk->harga)
         ?>
-        <br> <a><button class="btn btn-success" input type="submit">Beli</button></a></br>
+        <br> <a><button class="btn btn-primary" input type="submit">Add to cart</button></a> or <a href="<?php echo site_url().'/produk/buy/'.$produk->id_barang; ?>"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" border="0" alt="PayPal - Cara yang lebih aman dan lebih mudah untuk membayar online!"> </a>
         <?php echo form_close();?>
       </div>
   </div>

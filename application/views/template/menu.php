@@ -27,7 +27,29 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand page-scroll" href="home.php"></a>
+            </div>
+            
+            <div class="navbar-header rmm style">
+                <ul>
+                    <li class='kat' style="display:none"><a href="#/"> <span class="glyphicon glyphicon-list"></span></a> 
+                      <ul>
+                        <?php foreach ($daftar_kategori2 as $kategori) {
+                            echo "<li><a href='".site_url('produk/kategoriView/'.$kategori['id_kategori'])."'>".$kategori['nama_kategori']."</a>";
+                            echo "<ul>";
+                            foreach ($kategori['sub_categories'] as $sub1) {
+                              echo "<li><a href='".site_url('produk/kategoriView/'.$sub1['id_kategori'])."'>".$sub1['nama_kategori']."</a>";
+                              echo "<ul>";
+                              foreach ($sub1['sub_categories'] as $sub2) {
+                                  echo "<li><a href='".site_url('produk/kategoriView/'.$sub2['id_kategori'])."'>".$sub2['nama_kategori']."</a></li>";
+                              }
+                              echo "</ul>";
+                              echo "</li>";
+                            }
+                            echo "</ul></li>";
+                        }?>
+                      </ul>
+                    </li>
+                </ul>
             </div>
             <div class="navbar-header">
                 <a class="navbar-brand" href="<?php echo base_url();?>">T.corp</a>
@@ -43,7 +65,7 @@
                 <div>
                     <div class="navbar-form navbar-left">
                         <?php echo form_open('produk/cariProduk');?>
-                        <input class="form-control" type="text" placeholder="Cari Produk" name="search" size="70"/>
+                        <input id='form-search'class="form-control" type="text" placeholder="Cari Produk" name="search" size="75" value="<?php echo set_value('search');?>"/>
                         <button type="submit" class="form-control">
                         <span style="color:#999" class="glyphicon glyphicon-search"></span></button>
                         <?php echo form_close();?>
@@ -61,6 +83,10 @@
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
+        
+        <div class="kategori">
+            <?php $this->load->view('template/menu_kategori');?>
+        </div>
     </nav>
     
     <div style='display:none'>
@@ -79,7 +105,7 @@
             <input type="text" class="form-control" name="username"placeholder="Username" required >
             <input type="password" class="form-control" name="password"placeholder="Password" required >
             <p style="float:left"><input type="checkbox" name"ingat"/> Ingat Saya</p>
-            <input style="float:right" type="submit" value="Login" class="btn btn-success">
+            <input style="float:right" type="submit" value="Login" class="btn btn-primary">
             <?php echo form_close();?><br><hr>
             <p style="clear:both" align="center">Belum punya akun? <a href="<?php echo site_url('penjual/register');?>">Daftar</a></p>
             <script type="text/javascript">

@@ -27,7 +27,6 @@ class Penjual extends CI_Controller {
 	// check account
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-	  	$data['daftar_kategori']=$this->kategori_model->getAll();
 		$data['daftar_produk']=$this->produk_model->getAll();
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -47,10 +46,9 @@ class Penjual extends CI_Controller {
 				$this->session->set_userdata($array_items);
 				$username  = $this->session->userdata('username');
 		  		$data['user'] = $temp_account;
-			  	$data['daftar_kategori']=$this->kategori_model->getAll();
-				$data['daftar_produk']=$this->produk_model->getAll();
+				$data['daftar_produk']=$this->dashboard_lib->displayProduk();
 				$this->session->set_flashdata('notification', 'Berhasil Login');
-				$this->template->display('allproduct_page',$data,'ada');
+				$this->template->display('home_page',$data,'ada');
 			}  
 			else {
 			// kalau ga ada diredirect lagi ke halaman login
@@ -65,18 +63,17 @@ class Penjual extends CI_Controller {
 		$data['telepon']		=	$this->input->post('telepon');
 		$data['username']	=	$this->input->post('username');
 		$data['password']	=	$this->input->post('password');
-		$data2['daftar_kategori']= $this->kategori_model->getAll();
 		
 		$this->form_validation->set_rules('nama', 'Nama','required');
-		$this->form_validation->set_rules('email', 'Email','required|valid_email');
+		/*$this->form_validation->set_rules('email', 'Email','required|valid_email');
 		$this->form_validation->set_rules('telepon', 'Telepon','required|numeric');
 		$this->form_validation->set_rules('username', 'Username','required');
 		$this->form_validation->set_rules('password','Password','required');
 		$this->form_validation->set_rules('conf_password', 'Konfirmasi Password','matches[password]');
-		
+		*/
 		if($this->form_validation->run() == FALSE)
 		{
-			$this->template->display('register_page',$data2);
+			$this->template->display('register_page',$data);
 		}
 		else
 		{
@@ -95,7 +92,7 @@ class Penjual extends CI_Controller {
 		$this->load->view('function_public/signup');
 	}
 	public function logout(){
-		$this->session->set_userdata(array('logged_in'=>false));
+		$this->session->sess_destroy();
 		$this->cart->destroy();
 		redirect(site_url('welcome'));
 	}
@@ -103,7 +100,6 @@ class Penjual extends CI_Controller {
 		$data['sumber'] = $sumber;
   		$data['user'] = $this->penjual_model->get_user($uname)->row();
   		$data['produk'] = $this->produk_model->getProByUser($uname)->result();
-	  	$data['daftar_kategori']=$this->kategori_model->getAll();
   		//$data['daftar_keranjang']=$this->cart_model->ambil_produk($uname)->result();
 		$this->template->display('akun_page',$data,'ada');
 	}
@@ -131,7 +127,7 @@ class Penjual extends CI_Controller {
 	        echo 'alert("Profil berhasil diubah")';
 	        echo '</script>';
 	    }else{
-	    	
+
 	    }
         $this->viewAkun($username,'akun');
     }

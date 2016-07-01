@@ -14,16 +14,15 @@ class Dashboard extends CI_Controller {
 		$this->load->library('template');
 		}
 	public function index(){
-  		$data['user'] = $this->penjual_model->get_user($this->session->userdata('username'))->row();
 	  	$data['daftar_kategori']=$this->kategori_model->getAll();
-		$data['daftar_produk']=$this->produk_model->getAll();
+		$data['daftar_produk']=$this->dashboard_lib->displayProduk();
+		$data['daftar_kategori2'] = $this->dashboard_lib->getCategory(0);
 		$user_info = $this->session->userdata('logged_in');
 	  	if ($user_info==true){
-			$data['username'] = $this->session->userdata('username');
-	  		//$data['daftar_keranjang']=$this->cart_model->ambil_produk($data['username'])->result();
-			$this->template->display('allproduct_page',$data,'ada');
+	  		$data['user'] = $this->penjual_model->get_user($this->session->userdata('username'))->row();
+			$this->template->display('home_page',$data,'ada');
 	  	}else{
-	  		$this->template->display('allproduct_page',$data);
+	  		$this->template->display('home_page',$data);
 	  	}
 	}
 	public function konten($idCat,$idPro){

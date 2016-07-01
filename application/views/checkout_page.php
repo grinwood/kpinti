@@ -38,6 +38,7 @@ $(document).ready(function () {
     function cekvalid(){
         if ($("#submit").hasClass("disabled")) {
             document.getElementById("notif_danger").style.display = 'block';
+            document.getElementById("submit").style.display = 'none';
         } else {
             document.getElementById("notif_danger").style.display = 'none';
         }
@@ -55,7 +56,25 @@ $(document).ready(function () {
       });
       event.preventDefault();
       document.getElementById("notif_sukses").style.display = 'block';
+      document.getElementById("submit").style.display = 'none';
     });
+    $("#provinsi").change(function (){
+        var url = "<?php echo site_url('wilayah/add_ajax_kab');?>/"+$(this).val();
+        $('#kabupaten').load(url);
+        return false;
+    })
+      
+      $("#kabupaten").change(function (){
+          var url = "<?php echo site_url('wilayah/add_ajax_kec');?>/"+$(this).val();
+          $('#kecamatan').load(url);
+          return false;
+      })
+      
+      $("#kecamatan").change(function (){
+          var url = "<?php echo site_url('wilayah/add_ajax_des');?>/"+$(this).val();
+          $('#desa').load(url);
+          return false;
+      })
 });
 </script>
 <div class="container">
@@ -65,7 +84,6 @@ $(document).ready(function () {
             <div class="wizard-inner">
                 <div class="connecting-line"></div>
                 <ul class="nav nav-tabs" role="tablist">
-
                     <li role="presentation" class="active">
                         <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Data Pembelian">
                             <span class="round-tab">
@@ -111,41 +129,45 @@ $(document).ready(function () {
                             <div class="form-group">
                               <label for="inputName" class="col-lg-2 control-label">Nama</label>
                               <div class="col-lg-10">
-                                <input class="form-control" id="inputName" placeholder="Masukkan nama penerima" type="text" name="nama" required><br/>
+                                <input class="form-control" id="inputName" placeholder="Masukkan nama penerima" type="text" name="nama" pattern="[\w\s]{1,}" required><br/>
                               </div>
                             </div>
                             <div class="form-group">
-                              <label for="inputNo" class="col-lg-2 control-label">E-mail</label>
+                              <label for="inputEmail" class="col-lg-2 control-label">E-mail</label>
                               <div class="col-lg-10">
-                                <input class="form-control" id="inputNo" placeholder="E - mail" type="text" name="email"><br/>
+                                <input type="email" class="form-control" placeholder="Masukkan alamat email aktif Anda" name="email" id="inputEmail" data-error="mohon masukan alamat email yang valid" required>
+                                <div class="help-block with-errors"></div>
                               </div>
                             </div>
                             <div class="form-group">
                                 <label for="provinsi" class="col-lg-2 control-label">Provinsi</label>
                                 <div class="col-lg-10">
-                                    <select name="id_provinces" id="provinsi" class="form-control">
-                                            <option value="">Pilih Provinsi</option>
+                                    <select name="provinsi" id="provinsi" class="form-control" required>
+                                            <option disabled selected value>Pilih Provinsi</option>
+                                            <?php foreach($provinsi as $prov){
+                                                echo '<option value="'.$prov->id.'">'.$prov->nama.'</option>';
+                                              } ?>
                                     </select><br/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="kota" class="col-lg-2 control-label">Kota</label>
                                 <div class="col-lg-10">
-                                    <select name="id_regencies" id="kota" class="form-control">
-                                        <option value="">Pilih Kota</option>
+                                    <select name="kota" id="kabupaten" class="form-control" required>
+                                        <option disabled selected value>Pilih Kota / Kabupaten</option>
                                     </select><br/>
                                 </div>
                             </div>
                             <div class="form-group">
                               <label for="alamat" class="col-lg-2 control-label">Alamat</label>
                               <div class="col-lg-10">
-                                <textarea class="form-control" rows="3" id="alamat" placeholder="Masukkan detil alamat" name="alamat" form="order"></textarea><br/>
+                                <textarea class="form-control" rows="3" id="alamat" placeholder="Masukkan detil alamat" name="alamat" form="order" required></textarea><br/>
                               </div>
                             </div>
                             <div class="form-group">
                               <label for="inputPos" class="col-lg-2 control-label">Kode Pos</label>
                               <div class="col-lg-10">
-                                <input class="form-control" id="inputPos" placeholder="Masukkan kode pos" type="text" name="kodePos"><br/>
+                                <input class="form-control" id="inputPos" placeholder="Masukkan kode pos" type="text" name="kodePos" pattern="[0-9]{3,}" required ><br/>
                               </div>
                             </div>
                             <div class="form-group">
@@ -191,8 +213,8 @@ $(document).ready(function () {
                             </div>
                             <div class="radio">
                               <label>
-                                <input name="caraBayar" id="optionsRadios2" value="paypal" type="radio">
-                                Paypal
+                                <input name="caraBayar" id="optionsRadios2" value="another way" type="radio">
+                                another way
                               </label>
                             </div>
                           </div>
@@ -206,6 +228,7 @@ $(document).ready(function () {
                         <center><h3>Konfirmasi</h3></center><br/>
                         <p>You have successfully completed all steps.</p>
                         <ul class="list-inline pull-right">
+                            <li><button type="button" class="btn btn-default prev-step">Kembali</button></li>
                             <li><button type="submit" class="btn btn-primary complete" id="submit">Selesai</button></li>
                         </ul>
                     </div>

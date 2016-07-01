@@ -17,16 +17,12 @@
 		function update(){
 		}
 		function getDropdown(){
-			$this->db->order_by('nama_kategori','asc');
-			$result = $this->db->get('kategori');
-
-			$dropdown[''] = 'Pilih Kategori';
-			if($result->num_rows()>0){
-				foreach($result->result() as $row){
-					$dropdown[$row->id_kategori] = $row->nama_kategori;
-				}
-			}
-			return $dropdown;
+			$this->db->select('*');
+			$this->db->where('parent_id',0);
+			$this->db->from('kategori');
+			$query = $this->db->get();
+			
+			return $query->result();
 		}
 		function getAll(){
 			$data = array();
@@ -43,6 +39,23 @@
 			$this->db->select("*");
 			$this->db->from("kategori");
 			$this->db->where("id_kategori", $id_kategori);
+			return $this->db->get();
+		}
+		function get_main(){
+		    $this->db->where('parent_id',0);
+		    $query = $this->db->get('kategori');
+		    return $query;
+		}
+
+		function get_secondary($parent){
+		    $this->db->where('parent_id',$parent);
+		    $query = $this->db->get('kategori');
+		    return $query;
+		}
+		function getAllCat($parent_id){
+			$this->db->select('*');
+			$this->db->from('kategori');
+			$this->db->where('parent_id', $parent_id);
 			return $this->db->get();
 		}
 		function select_slide(){
