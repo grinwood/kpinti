@@ -1,6 +1,3 @@
-body{
-	background-color: #eee;
-}
 .page-wrapper{
 width: 900px;	
 margin:5% auto;
@@ -14,9 +11,11 @@ box-shadow: 1px 1px 1px 1px black;
 #tp-footer{
 	background-color: #eee;
 }
+#tp-content-wrap{
+}
 #tp-content{
-	margin-top: 100px;
-	position:relative;
+  margin:100px 10px 50px 10px;
+  opacity:1;
 }
 .header{
 	background-color:#f9f9f9;
@@ -56,7 +55,7 @@ div.bhoechie-tab-menu div.list-group>a{
 }
 div.bhoechie-tab-menu div.list-group>a .glyphicon,
 div.bhoechie-tab-menu div.list-group>a .fa {
-  color: #5A55A3;
+  color: #c2392a;
 }
 div.bhoechie-tab-menu div.list-group>a:first-child{
   border-top-right-radius: 0;
@@ -69,8 +68,8 @@ div.bhoechie-tab-menu div.list-group>a:last-child{
 div.bhoechie-tab-menu div.list-group>a.active,
 div.bhoechie-tab-menu div.list-group>a.active .glyphicon,
 div.bhoechie-tab-menu div.list-group>a.active .fa{
-  background-color: #5A55A3;
-  background-image: #5A55A3;
+  background-color: #c2392a;
+  background-image: #c2392a;
   color: #ffffff;
 }
 div.bhoechie-tab-menu div.list-group>a.active:after{
@@ -82,7 +81,7 @@ div.bhoechie-tab-menu div.list-group>a.active:after{
   border-left: 0;
   border-bottom: 13px solid transparent;
   border-top: 13px solid transparent;
-  border-left: 10px solid #5A55A3;
+  border-left: 10px solid #c2392a;
 }
 
 div.bhoechie-tab-content{
@@ -101,57 +100,27 @@ div.bhoechie-tab div.bhoechie-tab-content:not(.active){
 }
 /* css akun_page end */
 
-/* dropdown css akun */
-.dropdown-menu{
-	background-color: white;
 
-}
-.dropdown-menu>li>a {
-    color:black;
-}
-.dropdown ul.dropdown-menu {
-    border-radius:4px;
-    width:200px;
-}
-.dropdown ul.dropdown-menu:before {
-    content: "";
-    border-bottom: 10px solid #fff;
-    border-right: 10px solid transparent;
-    border-left: 10px solid transparent;
-    position: absolute;
-    top: -10px;
-    right: 16px;
-    z-index: 10;
-}
-.dropdown ul.dropdown-menu:after {
-    content: "";
-    border-bottom: 12px solid #ccc;
-    border-right: 12px solid transparent;
-    border-left: 12px solid transparent;
-    position: absolute;
-    top: -12px;
-    right: 14px;
-    z-index: 9;
-}
-/* dropdown css akun end */
 
 /* center cart content */
 .im-centered{margin: auto; max-width: 650px;}
 /* center cart content */
 
 /* css produk */
+.all-product > div{
+  position:relative;
+  right:20px;
+}
 .product{
-  margin:0px 0px 10px 20px;
+  margin:3px;
   list-style:none;
   border-radius: 2px ;
   border:1px solid #eee;
-  width:200px;
-  float:left;
+  display:inline-block;
 }
 .img-prod{
-  height:210px;
-  background-color: #eee;
   width:200px;
+  height:210px;
 }
 .product:hover{
   box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.2);
@@ -314,18 +283,17 @@ span.round-tab:hover {
 
 /* hovereffect produk */
 .hovereffect {
-width:100%;
-height:100%;
 float:left;
 overflow:hidden;
 position:relative;
 text-align:center;
 cursor:default;
+  width:200px;
 }
 
 .hovereffect .overlay {
-width:100%;
-height:100%;
+  width:100%;
+  height:100%;
 position:absolute;
 overflow:hidden;
 top:0;
@@ -333,7 +301,7 @@ left:0;
 opacity:0;
 background-color:rgba(0,0,0,0.5);
 -webkit-transition:all .4s ease-in-out;
-transition:all .4s ease-in-out
+transition:all .4s ease-in-out;
 }
 
 .hovereffect img {
@@ -369,7 +337,7 @@ opacity:0;
 filter:alpha(opacity=0);
 -webkit-transition:all .2s ease-in-out;
 transition:all .2s ease-in-out;
-margin:50px 0 0;
+margin:105px 0 0;
 padding:7px 14px;
 }
 
@@ -400,4 +368,236 @@ transform:translatey(0);
 -webkit-transition-delay:.2s;
 transition-delay:.2s;
 }
-/* hovereffect produk */
+/* hovereffect produk end*/
+/* dropdown css akun */
+.dropdown-menu{
+  background-color: white;
+
+}
+.dropdown-menu>li>a {
+    color:black;
+}
+.dropdown ul.dropdown-menu {
+    border-radius:4px;
+    width:200px;
+}
+.dropdown ul.dropdown-menu:before {
+    content: "";
+    border-bottom: 10px solid #fff;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    z-index: 10;
+}
+.dropdown ul.dropdown-menu:after {
+    content: "";
+    border-bottom: 12px solid #ccc;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    position: absolute;
+    top: -12px;
+    right: 14px;
+    z-index: 9;
+}
+/* dropdown css akun end */
+/* dropdown kategori */
+.kategori{
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.15);
+}
+ @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600);
+ 
+ @font-face {
+  font-family: 'icomoon';
+  src:url('../fonts/icomoon.eot');
+  src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.woff') format('woff'),
+    url('../fonts/icomoon.ttf') format('truetype'),
+    url('../fonts/icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* minimal styles for that navi */
+.rmm {margin: 0 auto;}
+.rmm ul {margin: 0; padding:0; list-style: none; position: relative; background: #000;}
+.rmm ul:after {content: ""; clear: both; display: block;}
+.rmm ul li {float: left;}
+.rmm ul li:hover {background: #fff;}
+.rmm ul li:hover > ul {display: block;}
+.rmm ul li:hover a{color: #fff;}
+.rmm ul li a {color: #fff; display: block; text-decoration: none;}
+.rmm ul ul {display: none; margin:0; padding: 0; position: absolute; top: 100%;}
+.rmm ul ul li {float: none; position: relative;}
+.rmm ul ul li a{color: #fff;}
+.rmm ul ul li a:hover {background: #202020;}
+.rmm ul ul ul {position: absolute; left: 100%; top:0; width: 100%;}
+
+/* mobile menu header button */
+.rmm-toggled {width: 100%; background-color: #555555; min-height: 50px; margin: 0 auto; display: none;}
+.rmm-closed ~ .rmm-mobile {display: none!important;}
+.rmm-toggled-controls{width: 100%;}
+.rmm-toggled-title{width: 60%; float: left; font-size: 27px; color: #fff; font-weight:600; display: block; padding: 8px 0; text-decoration: none; text-transform: uppercase; text-align: left; padding-left: 35px;}
+.rmm-toggled-button{width: 20%; float: left; margin-top: 3px;
+  display:block;
+  width: 32px;
+  padding:0 !important;
+  margin:10px 10px 0 0;
+  border:1px solid #fff;
+  border-radius:3px;
+  float: right;
+}
+.rmm-toggled-button span{float: left; display:block; margin: 3px 6px; height: 3px; background:white; width:20px;}
+
+/* normalny back button visible only on mobiles  */
+.rmm .rmm-back{display: none; font-size: 12px;}
+.rmm .rmm-back:after {display: none;}
+.rmm .rmm-back a:after {
+  font-family: 'icomoon';
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  content: "\e000";
+  position: relative;
+  display: inline-block;
+  -webkit-transform: rotate(-60deg);
+  transform: rotate(-60deg);
+  top: 1px;
+  right: -2px ;
+  float: left;
+  font-size: 10px;
+}
+.rmm-mobile .rmm-back{display: block;}
+
+/* mobile menu list */
+.rmm-mobile{width: 100%;}
+.rmm-mobile .rmm-dropdown:hover ~ ul, .rmm-mobile .rmm-dropdown:hover > ul ,.rmm-mobile .rmm-dropdown:hover + ul {display: none!important;}
+.rmm-mobile ul{width: 100%; position: inherit!important;}
+.rmm-mobile li{width: 100%; }
+
+/* mobile menu js action */
+.rmm-dropdown{display: block!important;}
+.rmm-mobile .rmm-subview{display: block!important; width: 100%;}
+.rmm-mobile .rmm-subover-hidden{display: none!important;}
+.rmm-mobile .rmm-subover-visible{display: block;}
+.rmm-mobile .rmm-subover-header{display: none!important; padding: 0; margin: 0;}
+
+/* mobile menu content */
+.rmm-mobile .rmm-submenu{position: relative; left: 0px;}
+
+.rmm .rmm-mobile li:hover > ul {display: none;}
+
+/* arrow down for wide screen */
+.rmm.style {text-align: left; font-family: Tahoma;}
+.rmm.style ul { background:none;display: inline-table; text-align:left;}
+.rmm.style ul li {text-align:left;border-radius:4px;}
+.rmm.style ul li:hover {background: #fff;}
+.rmm.style ul ul {display: none; margin:0; background: #fff;border-radius:4px;min-width: 250px;position: absolute;box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);}
+.rmm.style ul li a {color: black; font-weight:600; display: block; padding: 15px 15px; text-decoration: none; font-weight:600; }
+.rmm.style ul ul li {border-top: 0px solid #6B727C;}
+.rmm.style ul ul li a {padding: 12px 15px; color: black; }
+.rmm.style ul ul li a:hover {background: #eee;}
+
+/* arrow down for wide screen */
+/*.rmm.style ul li > a:not(:only-child):after {
+  font-family: 'icomoon';
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  content: "\e000";
+  position: relative;
+  display: inline-block;
+  -webkit-transform: rotate(210deg);
+  transform: rotate(210deg);
+  top: -4px;
+  left: 1px;
+  font-size: 10px;
+}*/
+
+/* arrow left for wide screen submenus  */
+/*.rmm.style ul ul li > a:not(:only-child):after {-webkit-transform: rotate(120deg)!important; transform: rotate(120deg)!important; top: 2px; font-size: 14px; float: right; margin-right: -20px;}*/
+
+/* mobile style */
+.rmm.style .rmm-mobile li > a:not(:only-child):after {-webkit-transform: rotate(120deg)!important; transform: rotate(120deg)!important; top: 4px!important; font-size: 14px!important; float: right; margin-right: -20px;}
+.rmm.style .rmm-mobile li{background: #3ab4a6; border-bottom: 1px solid #575f6a!important; border-top: 0!important; }
+
+
+
+
+/*
+ like mobile view style
+.rmm.style2 {text-align: left; font-family: Tahoma;}
+.rmm.style2 ul {box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.15); background:#990; text-transform: uppercase; display: inline-table; text-align:left; width: 100%;}
+.rmm.style2 ul li {float: none;}
+.rmm.style2 ul li:hover {background: #4b545f;}
+.rmm.style2 ul ul {display: none; margin:0; background: #5f6975; border-radius: 0px; padding: 0; position: relative;}
+.rmm.style2 ul li a {color: #fff; font-weight:600; display: block; padding: 15px 35px; text-decoration: none; font-weight:600; }
+.rmm.style2 ul ul li {border-bottom: 1px solid #575F6A; border-top: 1px solid #6B727C;}
+.rmm.style2 ul ul li a {padding: 12px 35px; color: #fff; }
+.rmm.style2 ul ul li a:hover {background: #4b545f;}
+.rmm.style2 ul ul ul {left: 0;}
+*/
+/* dropdown kategori end */
+
+
+
+
+/*banner css Bootstrap 3.1.0 Snippet by kimolalekan*/
+/* Makes images fully responsive */
+
+.img-responsive,
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  display: block;
+}
+.banner-1 > .carousel > .carousel-inner > .item > img{
+  width: 100%;
+  height:600px;
+}
+.banner-2{
+}
+.banner-2 > img{
+  width: 100%;
+  height:200px;
+}
+
+/* ------------------- Carousel Styling ------------------- */
+
+.carousel-inner {
+  border-radius: 1px;
+}
+
+.carousel-caption {
+  background-color: rgba(0,0,0,.5);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  padding: 0 0 0px 25px;
+  color: #fff;
+  text-align: left;
+}
+
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  z-index: 15;
+  margin: 0;
+  padding: 0 25px 25px 0;
+  text-align: right;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+  background-image: none;
+}
+
+}
+/*banner css end*/
+
